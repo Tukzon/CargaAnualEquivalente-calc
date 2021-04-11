@@ -1,0 +1,164 @@
+<head>
+    <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous">
+  </script>
+  <link rel="manifest" href="manifest.webmanifest">
+  
+  
+  <script>
+  if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/app/v1/sw.js').then(function(registration) {
+        // Registration was successful
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }).catch(function(err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  }
+  
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#log_out").click(function(){
+          $.get("/db/log_out.php", function(data){
+            if (data.valor==1){
+              alert(data.mensaje);
+              window.location="index.html";
+              }else {
+                  alert("Error al cerrar la cuenta.");
+              }
+          });
+       });
+  }); 
+
+  
+  </script>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/index.html"><img src="/img/calcicon.jpg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">CalCaeEnCua</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item ">
+            <a class="nav-link" href="/homeCC.html">Home </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/tabla.html">Historial<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="log_out">Cerrar Sesion</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+  
+  
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous">
+  </script>
+      
+    </head>
+  
+  <script type="text/javascript">
+          
+    $(document).ready(function(){
+      $.post( "/db/historial.php", function( data ){
+        var obj = JSON.parse(data);
+        $.each(obj.tabla, function(key, val) { 
+          $("#data_table tbody").append('<tr><td>'+val.numero+'</td><td>'+val.tienda+'</td><td>'+val.producto+'</td><td>'+val.marca+'</td><td>'+val.precio_contado+'</td><td>'+val.valor_cuota+'</td><td>'+val.num_cuota+'</td><td>'+val.otros_costos+'</td><td>'+val.resultado+'</td><td>'+val.fecha+'</td></tr>');
+        
+          });
+          }); 
+        },);
+      
+          </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
+      <!-- Custom styles for this template -->
+      <link href="dashboard.css" rel="stylesheet">
+   
+  
+  <div class="container-fluid">
+    <div class="row">
+      
+  
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <h2></h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm" id="data_table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tienda</th>
+                <th>Producto</th>
+                <th>Marca</th>
+                <th>Precio Contado</th>
+                <th>Valor Cuota</th>
+                <th>Numero de Cuotas</th>
+                <th>Otros costos</th>
+                <th>Cae</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+               
+              
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  </body>
+  </html>
+  

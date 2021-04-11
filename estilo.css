@@ -1,0 +1,45 @@
+#ruleta-indicador{
+    width : 30px;
+    height: 30px;
+    border-right: 5px solid	blue;
+    border-top: 5px solid blue;
+    transform: rotate(-45deg);
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    top: 100%;
+    margin-top: -10px;
+     
+}
+#ruleta-img-container{
+padding-bottom: 20px;
+}
+#circulo-imagen{
+height: 500px; 
+width: 500px;
+
+}
+#saldoactual{
+text-align: center;
+
+}
+#ruleta-img{
+width: 90%;
+height: auto;
+align-content: center;
+transition: 4000ms ease all;
+margin-left: 5%;
+}
+.prodtitle{
+position: relative;
+top: 18px;
+text-align: center;
+
+
+}
+.zetsu{
+    display: none;
+}
+.zetsu-all{
+    display: none;
+}

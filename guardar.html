@@ -1,0 +1,109 @@
+<head>
+    <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous">
+  </script>
+  <link rel="manifest" href="manifest.webmanifest">
+  
+  
+  <script>
+  if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/app/v1/sw.js').then(function(registration) {
+        // Registration was successful
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }).catch(function(err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  }
+  
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+                
+                $("#submit").click(function(){
+                    var T = $("#inputTienda").val();
+                    var M = $("#inputMarca").val();
+                    var P = $("#inputProducto").val();
+                   
+                   
+                    $.post("/db/guardar.php",
+                    {
+                        tienda: T,
+                        marca: M,
+                        producto: P
+                    },
+                    function(data){
+                        alert(data);
+                        window.location="homeCC.html";
+                    });
+                });
+            });
+  
+  
+  </script>
+  <script type="text/javascript">
+    
+    $(document).ready(function(){
+      $.get( "/api/v1/obtener_monto.php", function( data ) {
+        $("#m_actual").html(data.Mensaje);
+        
+      });
+       $.get( "/api/v1/obtener_nombre.php", function( data ) {
+        $("#userconected").html("Bienvenid@ "+ data.Nombre);
+        
+      });
+    });  
+    function NZetsu() {
+                    $(".zetsu").show();
+                    $(".Nzetsu").hide();
+                };
+    function NGuardar() {
+                    window.location="homeCC.html"
+                };
+          </script>
+        
+   <link rel="stylesheet" type="text/css" href="estilo.css">
+     
+  
+  
+  
+ 
+  
+  
+  </head>
+  <body>
+    
+        <div class="container Nzetsu">
+            <h1>Desea Guardar Su Calculo anterior?</h1>
+            <button class="btn btn-lg btn-primary btn-block " onclick="NZetsu()" >Si</button>
+            <button class="btn btn-lg btn-primary btn-block " onclick="NGuardar()" >No</button>
+        </div>
+        <div class="container zetsu">
+          <div class="form-group">
+            <h1 class="h3 mb-3 font-weight-normal">Ingrese informacion adicional para guardar su calculo</h1>
+            
+            <label for="input" ></label>Tienda en la que se encuentra el producto</label>
+            <input type="text" id="inputTienda" class="form-control "  required autofocus>
+            
+            <label for="input" >Marca del producto</label>
+            <input type="text" id="inputMarca"  class="form-control " required>
+            
+            <label for="input" >Producto a cotizar</label>
+            <input type="text" id="inputProducto"  class="form-control " required>
+           
+            
+            <button class="btn btn-lg btn-primary btn-block " style="margin-top: 20px;" id="submit" type="submit">Guardar</button>
+        </div>
+        </div>
+      
+  </body>
